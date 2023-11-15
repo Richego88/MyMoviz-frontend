@@ -11,9 +11,10 @@ function Home() {
   const [moviesData, setMoviesData] = useState([]);
 
   useEffect(() => {
-    fetch("http://my-moviz-backend-rosy-omega.vercel.app")
+    fetch("http://my-moviz-backend-rosy-omega.vercel.app/movies")
       .then((response) => response.json())
       .then((data) => {
+        console.log(data.movies);
         setMoviesData(data.movies);
       });
   }, []);
@@ -46,7 +47,7 @@ function Home() {
 
   // Movies list
 
-  const movies = moviesData.map((data, i) => {
+  const movies = moviesData?.map((data, i) => {
     const isLiked = likedMovies.some((movie) => movie === data.title);
     let title = data.title;
     let poster = `https://image.tmdb.org/t/p/w500/${data.poster_path}`;
